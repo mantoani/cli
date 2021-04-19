@@ -9,8 +9,9 @@ class Cli{
   var $method;
   var $params = array();
 
-  function __construct($namespace, $argv = null){
+  function __construct($namespace, $argv = null, $config = null){
     $this->namespace = $namespace;
+    $this->config = $config;
 
     if($argv !== null){
       $this->argv = $argv;
@@ -65,7 +66,11 @@ class Cli{
       return ;
     }
 
-    $C = new $c();
+    if($this->config !== null){
+      $C = new $c((object)["config" => $this->config]);
+    } else {
+      $C = new $c();
+    }
 
     if(!method_exists($C, $m)){
       echo "method $c::$m not found \n";

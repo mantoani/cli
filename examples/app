@@ -1,8 +1,6 @@
 #!/usr/bin/env php
 <?php
-  date_default_timezone_set('UTC');
-  echo file_exists(__DIR__."/App/App.php");
-  include_once("Class/App.php");
-  $App = new App();
-  $App->cli($argv);
+  include_once(__DIR__."/vendor/autoload.php");
+  // include optional config
+  $Cli = new Cli\Cli($namespace, $argv);
 ?>
